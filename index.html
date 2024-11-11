@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteo de Palabras en Artículos</title>
+    <style>
+        /* Estilos para un diseño más atractivo */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f4ff;
+            color: #4c2a85;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h2 {
+            color: #6a0dad;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        label {
+            font-size: 1.1em;
+            margin-top: 20px;
+            color: #4c2a85;
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 800px;
+            height: 120px;
+            margin-top: 10px;
+            padding: 12px;
+            border: 2px solid #d1b3ff;
+            border-radius: 8px;
+            resize: vertical;
+            font-size: 16px;
+            background-color: #f3e5ff;
+            color: #4c2a85;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(76, 42, 133, 0.2);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #d1b3ff;
+            font-size: 1em;
+        }
+
+        th {
+            background-color: #6a0dad;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f4ff;
+        }
+
+        button {
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #4c2a85;
+            box-shadow: 0px 4px 10px rgba(76, 42, 133, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            textarea, table {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Conteo de Palabras en Artículos</h2>
+    
+    <label for="textoArticulo">Escribe el contenido del artículo aquí:</label>
+    <textarea id="textoArticulo" placeholder="Escribe el texto del artículo..."></textarea>
+    
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>Palabra</th>
+                <th>Conteo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Educación</td><td id="conteo-educacion"></td></tr>
+            <tr><td>Democracia</td><td id="conteo-democracia"></td></tr>
+            <tr><td>Cultura</td><td id="conteo-cultura"></td></tr>
+            <tr><td>Soberanía</td><td id="conteo-soberania"></td></tr>
+            <tr><td>Familia</td><td id="conteo-familia"></td></tr>
+            <tr><td>Justicia</td><td id="conteo-justicia"></td></tr>
+            <tr><td>Derechos Humanos</td><td id="conteo-derechos-humanos"></td></tr>
+            <tr><td>Escuelas</td><td id="conteo-escuelas"></td></tr>
+            <tr><td>Dignidad</td><td id="conteo-dignidad"></td></tr>
+            <tr><td>Libertad</td><td id="conteo-libertad"></td></tr>
+        </tbody>
+    </table>
+    
+    <button onclick="contarPalabras()">Contar Palabras</button>
+
+    <script>
+        function contarPalabras() {
+            const palabras = [
+                { palabra: 'educación', id: 'conteo-educacion' },
+                { palabra: 'democracia', id: 'conteo-democracia' },
+                { palabra: 'cultura', id: 'conteo-cultura' },
+                { palabra: 'soberanía', id: 'conteo-soberania' },
+                { palabra: 'familia', id: 'conteo-familia' },
+                { palabra: 'justicia', id: 'conteo-justicia' },
+                { palabra: 'derechos humanos', id: 'conteo-derechos-humanos' },
+                { palabra: 'escuelas', id: 'conteo-escuelas' },
+                { palabra: 'dignidad', id: 'conteo-dignidad' },
+                { palabra: 'libertad', id: 'conteo-libertad' }
+            ];
+
+            const textoArticulo = document.getElementById("textoArticulo").value.toLowerCase();
+
+            palabras.forEach(({ palabra, id }) => {
+                const regex = new RegExp(`\\b${palabra}\\b`, "g");
+                const matches = (textoArticulo.match(regex) || []).length;
+                document.getElementById(id).textContent = matches > 0 ? `x${matches}` : '';
+            });
+        }
+    </script>
+</body>
+</html>
