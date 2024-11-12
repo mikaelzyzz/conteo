@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conteo de Palabras en Artículos</title>
     <style>
-        /* Estilos para un diseño más atractivo */
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f4ff;
@@ -76,6 +75,12 @@
             background-color: #f8f4ff;
         }
 
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
         button {
             background-color: #6a0dad;
             color: white;
@@ -86,7 +91,6 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, box-shadow 0.3s;
-            margin-top: 20px;
         }
 
         button:hover {
@@ -127,8 +131,12 @@
             <tr><td>Libertad</td><td id="conteo-libertad"></td></tr>
         </tbody>
     </table>
-    
-    <button onclick="contarPalabras()">Contar Palabras</button>
+
+    <div class="button-container">
+        <button onclick="contarPalabras()">Contar Palabras</button>
+        <button onclick="borrarTexto()">Borrar Texto</button>
+        <button onclick="pegarTexto()">Pegar Texto</button>
+    </div>
 
     <script>
         function contarPalabras() {
@@ -152,6 +160,20 @@
                 const matches = (textoArticulo.match(regex) || []).length;
                 document.getElementById(id).textContent = matches > 0 ? `x${matches}` : '';
             });
+        }
+
+        function borrarTexto() {
+            document.getElementById("textoArticulo").value = '';
+            document.querySelectorAll("td[id^='conteo']").forEach(td => td.textContent = '');
+        }
+
+        async function pegarTexto() {
+            try {
+                const texto = await navigator.clipboard.readText();
+                document.getElementById("textoArticulo").value = texto;
+            } catch (err) {
+                alert("Error al acceder al portapapeles: " + err);
+            }
         }
     </script>
 </body>
