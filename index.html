@@ -147,7 +147,7 @@
                 { palabra: 'soberanía', id: 'conteo-soberania' },
                 { palabra: 'familia', id: 'conteo-familia' },
                 { palabra: 'justicia', id: 'conteo-justicia' },
-                { palabra: 'derechos humanos', id: 'conteo-derechos-humanos' },
+                { palabra: 'derechos\\s+humanos', id: 'conteo-derechos-humanos' },
                 { palabra: 'escuelas', id: 'conteo-escuelas' },
                 { palabra: 'dignidad', id: 'conteo-dignidad' },
                 { palabra: 'libertad', id: 'conteo-libertad' }
@@ -156,7 +156,7 @@
             const textoArticulo = document.getElementById("textoArticulo").value.toLowerCase();
 
             palabras.forEach(({ palabra, id }) => {
-                const regex = new RegExp(`\\b${palabra}\\b`, "g");
+                const regex = new RegExp(`\\b${palabra}\\b`, "gi");
                 const matches = (textoArticulo.match(regex) || []).length;
                 document.getElementById(id).textContent = matches > 0 ? `x${matches}` : '';
             });
@@ -178,3 +178,4 @@
     </script>
 </body>
 </html>
+
